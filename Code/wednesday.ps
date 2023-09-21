@@ -7,7 +7,7 @@
 /arg {exch def} def % arg is swaping we invented
 
 /drawsquare { 
-    0 dict begin   % dict is dictionary to make it local varibale instade of global
+    0 dict begin  % dict is dictionary to make it local varibale instade of global
     /side arg
     /startPy arg % 
     /startPx arg
@@ -23,10 +23,23 @@
     } def
 
 0.75 setgray
-200 400 100 drawsquare
+200 400 100 drawsquare % the center gray one 
+300 500 100 drawsquare
+
+    % buttum left one
+    1 1 0 setrgbcolor
+    50 250 50 drawsquare  
+    100 300 50 drawsquare
+    150 350 50 drawsquare
 
 1 1 0 setrgbcolor
-100 200 50 drawsquare
+400 600 50 drawsquare %top right one 
+
+1 1 0 setrgbcolor
+70 600 50 drawsquare %bottum right corner 
+
+1 1 0 setrgbcolor
+380 250 50 drawsquare % butom rigt one 
 
 stack
 showpage 
