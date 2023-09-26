@@ -1,0 +1,75 @@
+% Ahmad Mustafa Jebran
+% PostScript Sq
+/arg {exch def} def % arg is swaping we invented
+
+/drawsquare { 
+    0 dict begin  % dict is dictionary to make it local varibale instade of global
+    /side arg
+    /startPy arg % 
+    /startPx arg
+    newpath
+    startPx startPy  moveto % starting point 
+    startPx startPy side add lineto % this is the left side of the box
+    startPx side add startPy side add lineto % top side of the box
+    startPx side add startPy lineto % right side of the box
+    % 200 200 lineto % tis is the bottom side of the box
+    
+    fill
+    end % end of dict
+    } def
+
+/drawGrid{
+    0 dict begin
+    /column arg 
+    /row arg    
+    /array arg  
+
+    newpath
+    arrayyrow 100 mul column 100 mul moveto  % Move to the position
+     arrayy row 1 get column get 1 eq  % Check if the corresponding array element is 1
+    {
+        100 100 100 100 fill  % Draw a filled rectanglee
+    } if
+    end
+} def
+
+% Define your array
+/arrayy [
+         [0 0 0 1 0]
+         [0 0 0 1 0]
+         [0 1 0 1 0]
+        ] def
+
+/convertXY {
+    0 dict begin
+    /numberRows arg
+    /column arg
+    /row arg
+
+    column 100 mul  % x
+    numberRows 1 sub row sub 100 mul %y
+    end
+}def
+
+% Loop through the rows and columns to draw the grid cells
+
+% nrows for 1
+0 1 2 { /row arg
+        0 1 4 {
+            /column arg
+            arrayy row get column get 1 eq {
+                % I need to pass what drawSqure requires it means the parameters
+                0.45 setgray
+            }
+                {
+                    0.90 setgray
+                } ifelse
+                row column arrayy length convertXY 100 drawsquare % on the satack
+        } for
+} for
+
+
+
+pstack
+stack
+showpage 
