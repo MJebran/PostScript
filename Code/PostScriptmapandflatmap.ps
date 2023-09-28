@@ -1,0 +1,56 @@
+
+% Map works but flatmap return a empty array
+/arg {exch def} def
+
+/map {
+    0 dict begin
+    /f arg
+    /oldArray arg
+    /newArray oldArray length array def 
+    0 1 oldArray length 1 sub {
+        /i arg
+        newArray i oldArray 
+        i get 
+        f
+        put
+    }for
+    newArray
+    end
+}def 
+[2 4 8 12] {dup add} map
+
+% flatmap
+/arg {exch def} def
+/flatmap{
+    2 dict begin
+    /f exch def
+    /initialArray exch def
+    /arrayLenght 0 def
+        initialArray {
+        f aload /arrayLenght exch length arrayLenght add def
+        } forall
+    arrayLenght array
+    astore % pop the elements from stack to array
+end
+} def
+
+[2 4 8 12] { 2 add dup 2 array astore} flatmap
+
+% flat map 
+/one{/initialArray exch def} def
+/two{/function exch def} def
+/three{count /arrayLenght exch def} def
+/flatmap{
+    0 dict 
+        initialArray{
+            function
+        } forall
+       three arrayLenght array astore
+    
+    end
+}def
+
+[2 4 8 12] one {2 add} two flatmap
+
+
+
