@@ -1,0 +1,20 @@
+
+/arg {exch def} def
+/swap{
+	
+    /j arg
+    /i arg
+    /givenArray arg
+    
+    % givenArray = [1 2 3]
+    /a givenArray i get def % I have access to 1 and get allows me to have access
+    /b givenArray j get def % I have access to 2
+    
+    givenArray j  a put % put placess it
+    givenArray i  b put
+    
+    givenArray
+	
+}def
+
+[10 20 30] 2 1 swap
