@@ -1,6 +1,6 @@
-
 /arg {exch def} def
 /swap{
+	0 dict begin
 	
     /j arg
     /i arg
@@ -13,8 +13,52 @@
     givenArray j  a put % put placess it
     givenArray i  b put
     
-    givenArray
-	
+	end
+}def
+% /a [10 20 30] def
+% a 2 1 swap
+% a ==
+[10 20 30] 2 1 swap
+
+/sort{
+    3 dict begin
+        /d arg
+        /givenArray arg %start with index zero
+        /indexNum 0 def
+        
+        givenArray length  1 sub{
+           /indexNum 0 def
+           givenArray length indexNum 1 add sub{
+           indexNum givenArray length 1 sub gt {}
+           {
+            givenArray indexNum get givenArray indexNum 1 add get d {}
+            {
+                givenArray indexNum indexNum 1 add swap 
+            }ifelse
+           }ifelse
+           /indexNum indexNum 1 add def
+           }repeat
+        }repeat
+        givenArray
+        end
 }def
 
-[10 20 30] 2 1 swap
+[1 2 3 78 4 5] {lt} sort
+
+
+/myfind {
+    4 dict begin
+
+    /valueToFind arg
+    /givenArray arg
+    /v 0 def
+    givenArray length {
+    givenArray v get valueToFind eq {v} if
+    /v v 1 add def
+    }repeat
+    end
+} def
+
+[1 2 3 78 4 5] 78 myfind
+
+pstack
